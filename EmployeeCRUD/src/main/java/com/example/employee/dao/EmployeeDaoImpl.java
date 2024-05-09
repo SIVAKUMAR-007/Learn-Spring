@@ -16,7 +16,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	private JdbcTemplate jdbcTemplate;
 
 	private static final String SELECT_EMP_SQL = "SELECT * FROM EMPLOYEE";
-	private static final String INSERT_EMP_SQL = "INSERT INTO EMPLOYEE (id, name) VALUES (?, ?)";
+	private static final String INSERT_EMP_SQL = "INSERT INTO EMPLOYEE (id, name, email) VALUES (?, ?, ?)";
+	private static final String UPDATE_EMP_SQL = "UPDATE employee SET name = ?, email = ? WHERE id = ?";
+	private static final String DELETE_EMP_SQL = "DELETE FROM employee WHERE id = ?";
+
+
 
 	@Override
 	public List<Employee> getAllEmployee() {
@@ -25,7 +29,20 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public int addEmployee(Employee employee) {
-		return jdbcTemplate.update(INSERT_EMP_SQL, employee.getId(), employee.getName());
+		return jdbcTemplate.update(INSERT_EMP_SQL, employee.getId(), employee.getName(), employee.getEmail());
 	}
+
+	@SuppressWarnings("unused")
+	@Override
+	public int updateEmployee(Long id, Employee updatedEmployee) {
+	    String sql = "UPDATE employee SET name = ?, email = ? WHERE id = ?";
+	    return jdbcTemplate.update(UPDATE_EMP_SQL, updatedEmployee.getName(), updatedEmployee.getEmail(), id);
+	}
+
+	 @Override
+	    public int deleteEmployee(Long id) {
+	        return jdbcTemplate.update(DELETE_EMP_SQL, id);
+	    }
+
 
 }

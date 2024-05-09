@@ -22,4 +22,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         int rowsAffected = employeeDao.addEmployee(employee);
         return rowsAffected > 0;
     }
+
+    @Override
+    public boolean updateEmployee(Long id, Employee updatedEmployee) {
+        int rowsAffected = employeeDao.updateEmployee(id, updatedEmployee);
+        return rowsAffected > 0;
+    }
+
+    @Override
+    public boolean deleteEmployee(Long id) {
+        int rowsAffected = employeeDao.deleteEmployee(id);
+        return rowsAffected > 0;
+    }
+
+
 }

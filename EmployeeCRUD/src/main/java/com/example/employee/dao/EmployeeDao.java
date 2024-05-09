@@ -7,4 +7,9 @@ public interface EmployeeDao {
     List<Employee> getAllEmployee();
     
     int addEmployee(Employee employee);
+    
+    int updateEmployee(Long id, Employee updatedEmployee);
+    
+    int deleteEmployee(Long id);
+    
 }
